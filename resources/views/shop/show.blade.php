@@ -32,6 +32,7 @@
             </p>
 
             <a 
+                href="{{ route('add.to.cart', $product->id) }}"
                 class="px-10 py-6 text-l uppercase text-white font-bold bg-blue-600 rounded-full w-full" 
                 role="button" 
                 aria-pressed="true">
