@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controller\PagesController;
-use App\Http\Controller\CartController;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
