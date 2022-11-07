@@ -54,59 +54,68 @@
                     </tr>
                 </thead>
 
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-10 w-10">
-                                        <img 
-                                            class="h-10 w-10 rounded-full" 
-                                            src="https://www.apple.com/v/macbook-pro-14-and-16/c/images/overview/hero/hero_intro_endframe__e6khcva4hkeq_large.jpg" 
-                                            alt="">
-                                    </div>
+                    @if(session('cartItems'))
+                        @foreach(session('cartItems') as $key => $value)
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10">
+                                                <img 
+                                                    class="h-10 w-10 rounded-full" 
+                                                    src="{{asset($value['image_path'])}}" 
+                                                    alt="$value['name']">
+                                            </div>
 
-                                    <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            Apple MacBook Pro 2021
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">
+                                                    {{$value['name']}}
+                                                </div>
+                                            </div>
                                         </div>
+                                    </td>
 
-                                        <div class="text-sm font-medium text-gray-400">
-                                            Apple
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">{{$value['details']}}</div>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span 
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            $ {{$value['price']}}
+                                        </span>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <select name="quantity" id="quantity" value="{{ $value['quantity'] }}">
+                                            @for ($i = 1; $i <= 10; $i++)
+                                                <option value="{{ $i }}">
+                                                    {{ $i }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </td>
+                                    
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900"> 
+                                            $ {{$value['quantity'] * $value['price']}} 
                                         </div>
-                                    </div>
-                                </div>
-                            </td>
+                                    </td>
 
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Apple M1 Pro, 16 GPU, 16GB, 512 GB SSD</div>
-                            </td>
+                                    <td class="px-6 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" role="button" class="text-red-600 hover:text-red-900">Delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        @endforeach
 
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span 
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                    $ 1993
-                                </span>
-                            </td>
-
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <select name="quantity" id="quantity">
-                                    @for ($i = 1; $i <= 10; $i++)
-                                        <option value="{{ $i }}">
-                                            {{ $i }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </td>
-                            
-                            <td class="px-6 py-4 whitespace-nowrap">
-                               <div class="text-sm text-gray-900"> $ 2499 </div>
-                            </td>
-
-                            <td class="px-6 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" role="button" class="text-red-600 hover:text-red-900">Delete</a>
-                            </td>
-                        </tr>
-                    </tbody>
+                        @else
+                        <td align="left" colspan="3">
+                            <p class="font-bold text-l text-black py-6 px-4">
+                                Shopping cart is empty.
+                            </p>
+                        </td>
+                    @endif
                 </table>
             </div>
         </div>
